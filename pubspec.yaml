@@ -1,0 +1,15 @@
+name: msg91
+description: msg91 unofficial dart code
+version: 1.0.0
+repository: https://github.com/luckycreationsindia/msg91
+homepage: https://github.com/luckycreationsindia/msg91
+
+environment:
+  sdk: ^3.1.0
+
+dependencies:
+  http: ^1.1.0
+
+dev_dependencies:
+  lints: ^2.1.1
+  test: ^1.24.6
