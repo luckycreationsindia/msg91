@@ -1,4 +1,4 @@
-# 👨‍💼📝 msg91 - msg91.com Official API Wrapper (Unofficial Package)
+# 💬 msg91 - msg91.com Official API Wrapper (Unofficial Dart Package)
 
 API for [msg91](https://msg91.com) - Secure and robust APIs for SMS, Email, Voice, Authentication and more
 
