@@ -12,15 +12,16 @@ void main() {
     test('Test Single Message', () async {
       try {
         Map<String, dynamic> result = await msg91.getSMS().send(
-          flowId: "FlowId",
-          recipients: SmsRecipients(
-            mobile: "919999999999",
-            key: {"a": "b"},
-          ),
-        );
+              flowId: "FlowId",
+              recipients: SmsRecipients(
+                mobile: "919999999999",
+                key: {"a": "b"},
+              ),
+            );
         expect(result.containsKey('message'), isTrue);
-      } catch(err) {
-        expect(err, {'message': 'The provided flow ID or template ID is invalid.'});
+      } catch (err) {
+        expect(err,
+            {'message': 'The provided flow ID or template ID is invalid.'});
       }
     });
   });
