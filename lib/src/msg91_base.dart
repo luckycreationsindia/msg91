@@ -34,13 +34,13 @@ class Msg91 {
     return this;
   }
 
-  validateInit() {
+  void validateInit() {
     if (!initialized) {
       throw Msg91Exception("Call the initialize() first");
     }
   }
 
-  validateAuthKey(String? authKey) {
+  void validateAuthKey(String? authKey) {
     if (authKey == null || authKey.isEmpty) {
       throw Msg91Exception("AuthKey is missing");
     }
@@ -60,13 +60,13 @@ class Sms {
   late String flowId;
   late dynamic recipients;
 
-  validateTemplateId() {
+  void validateTemplateId() {
     if (flowId.isEmpty) {
       throw Msg91Exception("Flow/Template ID is missing");
     }
   }
 
-  validateRecipients() {
+  void validateRecipients() {
     if (recipients == null) {
       throw Msg91Exception("Recipient is missing");
     }
@@ -74,7 +74,7 @@ class Sms {
       if (recipients.mobile == null || recipients.mobile.isEmpty) {
         throw Msg91Exception("Mobile Number is invalid");
       }
-    } else if(recipients.isEmpty) {
+    } else if (recipients.isEmpty) {
       throw Msg91Exception("Recipient List is empty");
     }
   }

@@ -1,11 +1,12 @@
 name: msg91
-description: msg91 unofficial dart code
-version: 1.0.0
+description: msg91 - msg91.com Official API Wrapper (Unofficial Dart Package)
+version: 1.0.0+1
 repository: https://github.com/luckycreationsindia/msg91
 homepage: https://github.com/luckycreationsindia/msg91
+issue_tracker: https://github.com/luckycreationsindia/msg91/issues
 
 environment:
-  sdk: ^3.1.0
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   http: ^1.1.0
@@ -13,3 +14,11 @@ dependencies:
 dev_dependencies:
   lints: ^2.1.1
   test: ^1.24.6
+
+platforms:
+  windows:
+  linux:
+  android:
+  ios:
+  macos:
+  web:
