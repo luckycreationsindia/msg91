@@ -20,7 +20,7 @@ void main() {
       .getSMS()
       .send(
           flowId: templateId,
-          recipients: SmsRecipients(
+          recipient: SmsRecipients(
             mobile: mobile,
             key: variables,
           ),
@@ -37,7 +37,7 @@ void main() {
   //Send to Multiple Recipient
   msg91
       .getSMS()
-      .send(
+      .sendMultiple(
           flowId: templateId,
           recipients: [
             SmsRecipients(
@@ -53,6 +53,20 @@ void main() {
             senderId: senderId,
             shortURL: shortUrl,
           ))
+      .then((value) {
+    print("Response: $value");
+  }).catchError((err) {
+    print("Err Response: $err");
+  });
+
+  //Add template
+  msg91
+      .getSMS()
+      .addTemplate(
+        template: "This is test Template ##mobile##, ##name##",
+        senderId: "SENDER",
+        templateName: "TEMPLATENAME",
+      )
       .then((value) {
     print("Response: $value");
   }).catchError((err) {
