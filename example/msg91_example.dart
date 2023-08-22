@@ -20,7 +20,7 @@ void main() {
       .getSMS()
       .send(
           flowId: templateId,
-          recipient: SmsRecipients(
+          recipient: SmsRecipient(
             mobile: mobile,
             key: variables,
           ),
@@ -40,11 +40,11 @@ void main() {
       .sendMultiple(
           flowId: templateId,
           recipients: [
-            SmsRecipients(
+            SmsRecipient(
               mobile: mobile,
               key: variables,
             ),
-            SmsRecipients(
+            SmsRecipient(
               mobile: mobile2,
               key: variables,
             )

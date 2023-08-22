@@ -13,7 +13,7 @@ void main() {
       try {
         Map<String, dynamic> result = await msg91.getSMS().send(
               flowId: "FlowId",
-              recipient: SmsRecipients(
+              recipient: SmsRecipient(
                 mobile: "919999999999",
                 key: {"a": "b"},
               ),

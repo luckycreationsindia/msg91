@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class SmsRecipients {
+class SmsRecipient {
   late String mobile;
   Map<String, String>? key;
 
-  SmsRecipients({required this.mobile, this.key});
+  SmsRecipient({required this.mobile, this.key});
 
   Map<String, dynamic> toJson() => {"mobile": mobile, "key": key};
 }
@@ -125,7 +125,7 @@ class Sms {
     if (_recipients == null) {
       throw Msg91Exception("Recipient is missing");
     }
-    if (_recipients is! List<SmsRecipients>) {
+    if (_recipients is! List<SmsRecipient>) {
       if (_recipients.mobile == null || _recipients.mobile.isEmpty) {
         throw Msg91Exception("Recipient Mobile is invalid");
       }
@@ -139,7 +139,7 @@ class Sms {
   /// Method to send Single SMS. [flowId] parameter (Flow ID is your Template ID) and [recipient] are required. Provide options if you have replacement variable for SMS Template.
   Future<dynamic> send(
       {required String flowId,
-      required SmsRecipients recipient,
+      required SmsRecipient recipient,
       SmsOptions? options}) async {
     _flowId = flowId;
     _recipients = recipient;
@@ -198,7 +198,7 @@ class Sms {
   /// Method to send SMS to multiple recipients. [flowId] parameter (Flow ID is your Template ID) and [recipients] are required. Provide options if you have replacement variable for SMS Template. You can also provide keys within [recipients] parameters for replacement of variable on different numbers.
   Future<dynamic> sendMultiple(
       {required String flowId,
-      required List<SmsRecipients> recipients,
+      required List<SmsRecipient> recipients,
       SmsOptions? options}) async {
     _flowId = flowId;
     _recipients = recipients;
