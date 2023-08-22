@@ -19,7 +19,7 @@ final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final sms = msg91.getSMS();
 sms.send(
     flowId: "templateId",
-    recipients: SmsRecipients(
+    recipient: SmsRecipient(
         mobile: "mobile",
         key: {"name": "John Doe"},
     ),
