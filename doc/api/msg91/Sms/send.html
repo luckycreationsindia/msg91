@@ -65,7 +65,7 @@
 
 <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a></span>
 <span class="name ">send</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="send-param-flowId">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">flowId</span>, </span></li>
-<li><span class="parameter" id="send-param-recipient"><span>required</span> <span class="type-annotation"><a href="../../msg91/SmsRecipients-class.html">SmsRecipients</a></span> <span class="parameter-name">recipient</span>, </span></li>
+<li><span class="parameter" id="send-param-recipient"><span>required</span> <span class="type-annotation"><a href="../../msg91/SmsRecipient-class.html">SmsRecipient</a></span> <span class="parameter-name">recipient</span>, </span></li>
 <li><span class="parameter" id="send-param-options"><span class="type-annotation"><a href="../../msg91/SmsOptions-class.html">SmsOptions</a>?</span> <span class="parameter-name">options</span>}</span></li>
 </ol>)
 
@@ -83,7 +83,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; send(
     {required String flowId,
-    required SmsRecipients recipient,
+    required SmsRecipient recipient,
     SmsOptions? options}) async {
   _flowId = flowId;
   _recipients = recipient;
