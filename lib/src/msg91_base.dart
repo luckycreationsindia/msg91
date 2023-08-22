@@ -20,7 +20,42 @@ class SmsOptions {
   Map<String, dynamic> toJson() => {"senderId": senderId, "shortURL": shortURL};
 }
 
+class OtpOptions {
+  String? templateId;
+  num? expiry;
+  bool? invisible = false;
+  num? otp;
+  num? userIp;
+  num? otpLength;
+  Unicode? unicode;
+  Map<String, String>? variables;
+
+  OtpOptions({
+    this.templateId,
+    this.expiry,
+    this.invisible,
+    this.otp,
+    this.userIp,
+    this.otpLength,
+    this.unicode,
+    this.variables,
+  });
+
+  Map<String, dynamic> toJson() => {
+        "templateId": templateId,
+        "otp_expiry": expiry,
+        "invisible": invisible! ? 1 : 0,
+        "otp": otp,
+        "userip": userIp,
+        "otp_length": otpLength ?? 4,
+        "unicode": unicode,
+        "variables": variables,
+      };
+}
+
 enum SMSType { NORMAL, UNICODE }
+
+enum Unicode { NORMAL, UNICODE }
 
 /// Msg91 main class
 class Msg91 {
@@ -57,6 +92,18 @@ class Msg91 {
     _validateAuthKey(key);
 
     return Sms(key!);
+  }
+
+  /// Method to get all OTP related APIs
+  /// <br/><br/>[authKey] parameter (optional) - Provide this parameter if you have not provided while initialization or if you want to use different authKey
+  /// <br/><br/>[flowId] parameter (required) - This is your Template ID
+  /// <br/><br/>
+  Otp getOtp({String? authKey, required String flowId}) {
+    _validateInit();
+    String? key = authKey ?? _authKey;
+    _validateAuthKey(key);
+
+    return Otp(key!, flowId);
   }
 }
 
@@ -215,7 +262,8 @@ class Sms {
     } else if (_senderId.length < 3) {
       throw Msg91Exception("Minimum Characters in Sender ID should be 3");
     } else if (_senderId.length > 6) {
-      throw Msg91Exception("Maximum Characters in Sender ID should not be greater than 6");
+      throw Msg91Exception(
+          "Maximum Characters in Sender ID should not be greater than 6");
     }
   }
 
@@ -252,7 +300,7 @@ class Sms {
       "template_name": templateName,
     };
 
-    if(dltTemplateId != null && dltTemplateId.isNotEmpty) {
+    if (dltTemplateId != null && dltTemplateId.isNotEmpty) {
       data['dlt_template_id'] = dltTemplateId;
     }
 
@@ -266,7 +314,90 @@ class Sms {
       );
 
       if (result.statusCode == 200) {
-        Map<String, dynamic> response = jsonDecode(result.body);
+        // Map<String, dynamic> response = jsonDecode(result.body);
+        return Future.value("Success");
+      } else {
+        return Future.error(result.reasonPhrase ?? result.body);
+      }
+    } catch (error) {
+      return Future.error(error);
+    }
+  }
+}
+
+class Otp {
+  String authKey;
+  late String templateId;
+  final String _sendOTPUrl = "https://api.msg91.com/api/v5/otp";
+
+  Otp(this.authKey, this.templateId);
+
+  late String _mobileNumber;
+
+  void _validateMobileNumber() {
+    if (_mobileNumber.isEmpty) {
+      throw Msg91Exception("Mobile Number cannot be empty");
+    }
+  }
+
+  /// Method to send OTP.
+  /// <hr/>
+  /// <br/>[mobileNumber] parameter (required) is where you set mobile number.
+  /// <br/><br/>[options] parameter (optional) is where you set [OtpOptions].<br/>
+  /// <br/>[options.invisible] parameter (optional) - For MOBILE APP only (do not use for Browsers); 1 for ON, 0 for OFF; Mobile Number Automatically Verified if its Mobile Network is ON.
+  /// <br/><br/>[options.otp] parameter (optional) - OTP you want to send; if you don't pass this value, MSG91 will generate it.
+  /// <br/><br/>[options.userIp] parameter (optional) - User IP
+  /// <br/><br/>[options.otpLength] parameter (optional) - Number of digits in OTP (default : 4, min : 4, max : 9)
+  /// <br/><br/>[options.expiry] parameter (optional) - Enter the value of OTP expiry time (in minutes) (default: 24 hours, max: 7 days, min: 1 minute)
+  /// <br/><br/>[options.unicode] parameter (optional) - Enter [Unicode.UNICODE] if sending SMS in languages other than English, for english pass [Unicode.NORMAL]<br/><br/>
+  Future<dynamic> send(
+      {required String mobileNumber, OtpOptions? options}) async {
+    _mobileNumber = mobileNumber;
+    _validateMobileNumber();
+
+    Map<String, dynamic> searchParameters = {
+      "templateId": templateId,
+      "mobile": _mobileNumber
+    };
+
+    Map<String, dynamic> data = {};
+
+    if (options != null) {
+      if (options.invisible != null && options.invisible!) {
+        searchParameters['invisible'] = 1;
+      }
+      if (options.otp != null && options.otp! > 0) {
+        searchParameters['otp'] = options.otp!;
+      }
+      if (options.userIp != null && options.userIp! > 0) {
+        searchParameters['userip'] = options.userIp!;
+      }
+      if (options.otpLength != null && options.otpLength! > 0) {
+        searchParameters['otp_length'] = options.otpLength!;
+      }
+      if (options.expiry != null && options.expiry! > 0) {
+        searchParameters['otp_expiry'] = options.expiry!;
+      }
+      if (options.unicode != null && options.unicode! == Unicode.UNICODE) {
+        searchParameters['unicode'] = 1;
+      }
+      if (options.variables != null) {
+        data = options.variables!;
+      }
+    }
+
+    Uri uri = Uri.parse(_sendOTPUrl);
+    uri = uri.replace(queryParameters: searchParameters);
+
+    try {
+      http.Response result = await http.post(
+        uri,
+        headers: <String, String>{"authkey": authKey},
+        body: jsonEncode(data),
+      );
+
+      if (result.statusCode == 200) {
+        // Map<String, dynamic> response = jsonDecode(result.body);
         return Future.value("Success");
       } else {
         return Future.error(result.reasonPhrase ?? result.body);

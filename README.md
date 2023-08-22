@@ -39,16 +39,19 @@ sms.send(
 | # | Feature               | Status |
 |---|-----------------------|--------|
 | 1 | Send SMS              | 🟢     |
-| 2 | Send OTP              | 🔴     |
-| 3 | Launch Campaign       | 🔴     |
-| 4 | Check Balance         | 🔴     |
-| 5 | Add SMS Template      | 🟢     |
-| 6 | Send WhatsApp Message | 🔴     |
+| 2 | Send OTP              | 🟢     |
+| 3 | Resend OTP            | 🟡     |
+| 4 | Verify OTP            | 🟡     |
+| 5 | Launch Campaign       | 🔴     |
+| 6 | Check Balance         | 🔴     |
+| 7 | Add SMS Template      | 🟢     |
+| 8 | Send WhatsApp Message | 🔴     |
 
 #### Much more features will be added as the project grows and it'll be really helpful if anyone can contribute to this package.
 
 <br/>
 🔴 Pending<br/>
+🟡 In Progress<br/>
 🟢 Complete<br/>
 <br/>
 

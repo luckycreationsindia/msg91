@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the send method from the Sms class, for the Dart programming language.">
-  <title>send method - Sms class - msg91 library - Dart API</title>
+  <meta name="description" content="API docs for the send method from the Otp class, for the Dart programming language.">
+  <title>send method - Otp class - msg91 library - Dart API</title>
 
 
   
@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">msg91</a></li>
     <li><a href="../../msg91/msg91-library.html">msg91</a></li>
-    <li><a href="../../msg91/Sms-class.html">Sms</a></li>
+    <li><a href="../../msg91/Otp-class.html">Otp</a></li>
     <li class="self-crumb">send method</li>
   </ol>
   <div class="self-name">send</div>
@@ -54,7 +54,7 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="msg91&#47;Sms-class-sidebar.html"
+      data-above-sidebar="msg91&#47;Otp-class-sidebar.html"
       data-below-sidebar="">
       <div>
 <h1><span class="kind-method">send</span> method 
@@ -64,9 +64,8 @@
       
 
 <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a></span>
-<span class="name ">send</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="send-param-flowId">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">flowId</span>, </span></li>
-<li><span class="parameter" id="send-param-recipient"><span>required</span> <span class="type-annotation"><a href="../../msg91/SmsRecipients-class.html">SmsRecipients</a></span> <span class="parameter-name">recipient</span>, </span></li>
-<li><span class="parameter" id="send-param-options"><span class="type-annotation"><a href="../../msg91/SmsOptions-class.html">SmsOptions</a>?</span> <span class="parameter-name">options</span>}</span></li>
+<span class="name ">send</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="send-param-mobileNumber">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">mobileNumber</span>, </span></li>
+<li><span class="parameter" id="send-param-options"><span class="type-annotation"><a href="../../msg91/OtpOptions-class.html">OtpOptions</a>?</span> <span class="parameter-name">options</span>}</span></li>
 </ol>)
 
       
@@ -74,7 +73,16 @@
     </section>
     
 <section class="desc markdown">
-  <p>Method to send Single SMS. <code>flowId</code> parameter (Flow ID is your Template ID) and <code>recipient</code> are required. Provide options if you have replacement variable for SMS Template.</p>
+  <p>Method to send OTP.</p>
+<hr>
+<br>[mobileNumber] parameter (required) is where you set mobile number.
+<br><br>[options] parameter (optional) is where you set [OtpOptions].<br>
+<br>[options.invisible] parameter (optional) - For MOBILE APP only (do not use for Browsers); 1 for ON, 0 for OFF; Mobile Number Automatically Verified if its Mobile Network is ON.
+<br><br>[options.otp] parameter (optional) - OTP you want to send; if you don't pass this value, MSG91 will generate it.
+<br><br>[options.userIp] parameter (optional) - User IP
+<br><br>[options.otpLength] parameter (optional) - Number of digits in OTP (default : 4, min : 4, max : 9)
+<br><br>[options.expiry] parameter (optional) - Enter the value of OTP expiry time (in minutes) (default: 24 hours, max: 7 days, min: 1 minute)
+<br><br>[options.unicode] parameter (optional) - Enter [Unicode.UNICODE] if sending SMS in languages other than English, for english pass [Unicode.NORMAL]<br><br>
 </section>
 
 
@@ -82,57 +90,56 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; send(
-    {required String flowId,
-    required SmsRecipients recipient,
-    SmsOptions? options}) async {
-  _flowId = flowId;
-  _recipients = recipient;
+    {required String mobileNumber, OtpOptions? options}) async {
+  _mobileNumber = mobileNumber;
+  _validateMobileNumber();
 
-  _validateTemplateId();
-  _validateRecipients();
-
-  Map&lt;String, dynamic&gt; data = {
-    &quot;flow_id&quot;: flowId,
+  Map&lt;String, dynamic&gt; searchParameters = {
+    &quot;templateId&quot;: templateId,
+    &quot;mobile&quot;: _mobileNumber
   };
 
-  if (recipient.key != null) {
-    recipient.key!.forEach((key, value) {
-      data[key] = value;
-    });
-  }
-
-  data[&#39;mobiles&#39;] = recipient.mobile;
+  Map&lt;String, dynamic&gt; data = {};
 
   if (options != null) {
-    if (options.senderId != null) {
-      data[&#39;sender&#39;] = options.senderId;
+    if (options.invisible != null &amp;&amp; options.invisible!) {
+      searchParameters[&#39;invisible&#39;] = 1;
     }
-    data[&#39;short_url&#39;] =
-        options.shortURL == null || !options.shortURL! ? &#39;0&#39; : &#39;1&#39;;
+    if (options.otp != null &amp;&amp; options.otp! &gt; 0) {
+      searchParameters[&#39;otp&#39;] = options.otp!;
+    }
+    if (options.userIp != null &amp;&amp; options.userIp! &gt; 0) {
+      searchParameters[&#39;userip&#39;] = options.userIp!;
+    }
+    if (options.otpLength != null &amp;&amp; options.otpLength! &gt; 0) {
+      searchParameters[&#39;otp_length&#39;] = options.otpLength!;
+    }
+    if (options.expiry != null &amp;&amp; options.expiry! &gt; 0) {
+      searchParameters[&#39;otp_expiry&#39;] = options.expiry!;
+    }
+    if (options.unicode != null &amp;&amp; options.unicode! == Unicode.UNICODE) {
+      searchParameters[&#39;unicode&#39;] = 1;
+    }
+    if (options.variables != null) {
+      data = options.variables!;
+    }
   }
+
+  Uri uri = Uri.parse(_sendOTPUrl);
+  uri = uri.replace(queryParameters: searchParameters);
 
   try {
     http.Response result = await http.post(
-      Uri.parse(_smsUrl),
+      uri,
       headers: &lt;String, String&gt;{&quot;authkey&quot;: authKey},
       body: jsonEncode(data),
     );
 
     if (result.statusCode == 200) {
-      Map&lt;String, dynamic&gt; response = jsonDecode(result.body);
-      String type = response[&#39;type&#39;];
-      String message = response[&#39;message&#39;];
-
-      switch (type) {
-        case &quot;success&quot;:
-          return Future.value({&quot;message&quot;: message});
-        case &quot;error&quot;:
-          return Future.error({&quot;message&quot;: message});
-        default:
-          return Future.value(data);
-      }
+      &#47;&#47; Map&lt;String, dynamic&gt; response = jsonDecode(result.body);
+      return Future.value(&quot;Success&quot;);
     } else {
-      return Future.error(data);
+      return Future.error(result.reasonPhrase ?? result.body);
     }
   } catch (error) {
     return Future.error(error);
@@ -154,12 +161,12 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">msg91</a></li>
     <li><a href="../../msg91/msg91-library.html">msg91</a></li>
-    <li><a href="../../msg91/Sms-class.html">Sms</a></li>
+    <li><a href="../../msg91/Otp-class.html">Otp</a></li>
     <li class="self-crumb">send method</li>
 </ol>
 
 
-    <h5>Sms class</h5>
+    <h5>Otp class</h5>
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">

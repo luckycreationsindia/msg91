@@ -72,4 +72,11 @@ void main() {
   }).catchError((err) {
     print("Err Response: $err");
   });
+
+  //Send OTP
+  msg91.getOtp(flowId: "TEMPLATEID").send(mobileNumber: mobile).then((value) {
+    print("Response: $value");
+  }).catchError((err) {
+    print("Err Response: $err");
+  });
 }

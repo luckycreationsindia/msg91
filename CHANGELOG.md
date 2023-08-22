@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Method to Send OTP
+
 ## 1.0.1
 
 - Changes to send single and multiple SMS
