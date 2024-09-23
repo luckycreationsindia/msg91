@@ -1,3 +1,7 @@
+## 1.0.2+1
+
+- Update dependencies and SDK constraints in pubspec.yaml
+
 ## 1.0.2
 
 - Method to Send OTP
