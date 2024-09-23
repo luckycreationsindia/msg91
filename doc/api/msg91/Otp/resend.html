@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the toJson method from the SmsOptions class, for the Dart programming language.">
-  <title>toJson method - SmsOptions class - msg91 library - Dart API</title>
+  <meta name="description" content="API docs for the resend method from the Otp class, for the Dart programming language.">
+  <title>resend method - Otp class - msg91 library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">msg91</a></li>
     <li><a href="../../msg91/msg91-library.html">msg91.dart</a></li>
-    <li><a href="../../msg91/SmsOptions-class.html">SmsOptions</a></li>
-    <li class="self-crumb">toJson method</li>
+    <li><a href="../../msg91/Otp-class.html">Otp</a></li>
+    <li class="self-crumb">resend method</li>
   </ol>
-  <div class="self-name">toJson</div>
+  <div class="self-name">resend</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,28 +54,84 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="msg91&#47;SmsOptions-class-sidebar.html"
+    data-above-sidebar="msg91&#47;Otp-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">toJson</span> method 
+<h1><span class="kind-method">resend</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
-<span class="name ">toJson</span>(<wbr>)
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a></span>
+<span class="name ">resend</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="resend-param-type"><span class="type-annotation"><a href="../../msg91/ResendOTPType.html">ResendOTPType</a></span> <span class="parameter-name">type</span> = <span class="default-value">ResendOTPType.VOICE</span>, </span></li>
+<li><span class="parameter" id="resend-param-mobileNumber"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">mobileNumber</span>, </span></li>
+</ol>})
 
       
 
     </section>
     
+<section class="desc markdown">
+  <p>Method to resend OTP. Maximum Retry Limit is 2.</p>
+<hr>
+<br>[otp] parameter (required) is where you set otp to verify.
+<br>[mobileNumber] parameter (required) is where you set mobile number.
+<br>[type] parameter (optional) is where you set type of OTP (default is voice).
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Map&lt;String, dynamic&gt; toJson() =&gt; {&quot;senderId&quot;: senderId, &quot;shortURL&quot;: shortURL};</code></pre>
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; resend({ResendOTPType type = ResendOTPType.VOICE, required String mobileNumber}) async {
+  _mobileNumber = mobileNumber;
+  _validateMobileNumber();
+
+  late String _type;
+
+  switch (type) {
+    case ResendOTPType.VOICE:
+      _type = &quot;Voice&quot;;
+      break;
+    case ResendOTPType.TEXT:
+      _type = &quot;text&quot;;
+      break;
+    default:
+      _type = &quot;Voice&quot;;
+  }
+
+  Map&lt;String, dynamic&gt; searchParameters = {&quot;authkey&quot;: authKey, &quot;retrytype&quot;: _type, &quot;mobile&quot;: _mobileNumber};
+
+  Uri uri = Uri.parse(_resendOTPUrl);
+  uri = uri.replace(queryParameters: searchParameters);
+
+  try {
+    http.Response result = await http.post(
+      uri,
+      headers: &lt;String, String&gt;{&quot;authkey&quot;: authKey},
+    );
+
+    if (result.statusCode == 200) {
+      Map&lt;String, dynamic&gt; response = jsonDecode(result.body);
+      String type = response[&#39;type&#39;];
+      String message = response[&#39;message&#39;];
+
+      switch (type) {
+        case &quot;success&quot;:
+          return Future.value({&quot;message&quot;: message});
+        case &quot;error&quot;:
+          return Future.error({&quot;message&quot;: message});
+        default:
+          return Future.value(result.body);
+      }
+    } else {
+      return Future.error(result.reasonPhrase ?? result.body);
+    }
+  } catch (error) {
+    return Future.error(error);
+  }
+}</code></pre>
 </section>
 
 
@@ -92,12 +148,12 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">msg91</a></li>
     <li><a href="../../msg91/msg91-library.html">msg91</a></li>
-    <li><a href="../../msg91/SmsOptions-class.html">SmsOptions</a></li>
-    <li class="self-crumb">toJson method</li>
+    <li><a href="../../msg91/Otp-class.html">Otp</a></li>
+    <li class="self-crumb">resend method</li>
 </ol>
 
 
-    <h5>SmsOptions class</h5>
+    <h5>Otp class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

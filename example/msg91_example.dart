@@ -1,4 +1,6 @@
 import 'package:msg91/msg91.dart';
+import 'package:msg91/src/msg91_otp.dart';
+import 'package:msg91/src/msg91_sms.dart';
 
 void main() {
   String authKey = "XXXXXXXXXX";
@@ -9,11 +11,7 @@ void main() {
   String mobile2 = "911111111112";
   String? senderId = "John";
   bool shortUrl = false;
-  Map<String, String> variables = {
-    "name": "John Doe",
-    "number": "1111111111",
-    "email": "admin@localhost"
-  };
+  Map<String, String> variables = {"name": "John Doe", "number": "1111111111", "email": "admin@localhost"};
 
   //Send to Single Recipient
   msg91
@@ -74,7 +72,21 @@ void main() {
   });
 
   //Send OTP
-  msg91.getOtp(flowId: "TEMPLATEID").send(mobileNumber: mobile).then((value) {
+  msg91.getOtp().send(mobileNumber: mobile, options: OtpOptions(templateId: templateId)).then((value) {
+    print("Response: $value");
+  }).catchError((err) {
+    print("Err Response: $err");
+  });
+
+  //Verify OTP
+  msg91.getOtp().verify(otp: "123456", mobileNumber: mobile).then((value) {
+    print("Response: $value");
+  }).catchError((err) {
+    print("Err Response: $err");
+  });
+
+  //Resend OTP
+  msg91.getOtp().resend(mobileNumber: mobile, type: ResendOTPType.VOICE).then((value) {
     print("Response: $value");
   }).catchError((err) {
     print("Err Response: $err");

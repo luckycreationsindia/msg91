@@ -1,3 +1,11 @@
+## 1.0.3
+
+- **Breaking Changes** related to OTP
+
+Now **OtpOptions** are required with templateId within the options
+
+Add **verify** and **resend** OTP methods
+
 ## 1.0.2+1
 
 - Update dependencies and SDK constraints in pubspec.yaml

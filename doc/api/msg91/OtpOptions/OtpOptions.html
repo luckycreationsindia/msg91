@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">msg91</a></li>
-    <li><a href="../../msg91/msg91-library.html">msg91</a></li>
+    <li><a href="../../msg91/msg91-library.html">msg91.dart</a></li>
     <li><a href="../../msg91/OtpOptions-class.html">OtpOptions</a></li>
     <li class="self-crumb">OtpOptions constructor</li>
   </ol>
@@ -37,14 +37,14 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
@@ -62,15 +62,15 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">OtpOptions</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-templateId">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">templateId</span>, </span></li>
+      <span class="name ">OtpOptions</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="-param-templateId"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">templateId</span>, </span></li>
 <li><span class="parameter" id="-param-expiry"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/num-class.html">num</a>?</span> <span class="parameter-name">expiry</span>, </span></li>
 <li><span class="parameter" id="-param-invisible"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">invisible</span>, </span></li>
 <li><span class="parameter" id="-param-otp"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/num-class.html">num</a>?</span> <span class="parameter-name">otp</span>, </span></li>
 <li><span class="parameter" id="-param-userIp"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/num-class.html">num</a>?</span> <span class="parameter-name">userIp</span>, </span></li>
 <li><span class="parameter" id="-param-otpLength"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/num-class.html">num</a>?</span> <span class="parameter-name">otpLength</span>, </span></li>
 <li><span class="parameter" id="-param-unicode"><span class="type-annotation"><a href="../../msg91/Unicode.html">Unicode</a>?</span> <span class="parameter-name">unicode</span>, </span></li>
-<li><span class="parameter" id="-param-variables"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">variables</span>}</span></li>
-</ol>)
+<li><span class="parameter" id="-param-variables"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">variables</span>, </span></li>
+</ol>})
     </section>
 
     
@@ -79,7 +79,16 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">OtpOptions</code></pre>
+  <pre class="language-dart"><code class="language-dart">OtpOptions({
+  required this.templateId,
+  this.expiry,
+  this.invisible,
+  this.otp,
+  this.userIp,
+  this.otpLength,
+  this.unicode,
+  this.variables,
+});</code></pre>
 </section>
 
 
@@ -102,6 +111,7 @@
 
 
     <h5>OtpOptions class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
@@ -112,7 +122,7 @@
 <footer>
   <span class="no-break">
     msg91
-      1.0.2
+      1.0.2+1
   </span>
 
   

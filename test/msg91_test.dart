@@ -1,4 +1,5 @@
 import 'package:msg91/msg91.dart';
+import 'package:msg91/src/msg91_sms.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -20,8 +21,7 @@ void main() {
             );
         expect(result.containsKey('message'), isTrue);
       } catch (err) {
-        expect(err,
-            {'message': 'The provided flow ID or template ID is invalid.'});
+        expect(err, {'message': 'The provided flow ID or template ID is invalid.'});
       }
     });
   });
