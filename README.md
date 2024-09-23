@@ -14,6 +14,7 @@ Just install the package and check example for usage
 
 ```dart
 import 'package:msg91/msg91.dart';
+import 'package:msg91/src/msg91_sms.dart';
 
 final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final sms = msg91.getSMS();
@@ -40,8 +41,8 @@ sms.send(
 |---|-----------------------|--------|
 | 1 | Send SMS              | 🟢     |
 | 2 | Send OTP              | 🟢     |
-| 3 | Resend OTP            | 🟡     |
-| 4 | Verify OTP            | 🟡     |
+| 3 | Resend OTP            | 🟢     |
+| 4 | Verify OTP            | 🟢     |
 | 5 | Launch Campaign       | 🔴     |
 | 6 | Check Balance         | 🔴     |
 | 7 | Add SMS Template      | 🟢     |
