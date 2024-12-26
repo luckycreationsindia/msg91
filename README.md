@@ -17,7 +17,6 @@ Just install the package and check example for usage
 
 ```dart
 import 'package:msg91/msg91.dart';
-import 'package:msg91/src/msg91_sms.dart';
 
 final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final sms = msg91.getSMS();
@@ -42,7 +41,6 @@ sms.send(
 
 ```dart
 import 'package:msg91/msg91.dart';
-import 'package:msg91/src/msg91_account.dart';
 
 final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final account = msg91.getAccount();
