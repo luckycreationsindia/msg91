@@ -11,6 +11,9 @@ This package provides functionality to send sms via msg91 API with ease
 Just install the package and check example for usage
 
 ## Usage
+<hr>
+
+### Send Message
 
 ```dart
 import 'package:msg91/msg91.dart';
@@ -35,6 +38,24 @@ sms.send(
 });
 ```
 
+### Get Account Balance
+
+```dart
+import 'package:msg91/msg91.dart';
+import 'package:msg91/src/msg91_account.dart';
+
+final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
+final account = msg91.getAccount();
+
+account.checkBalance(
+    routeType: RouteType.transactional,
+).then((value) {
+    print("Balance: $value");
+}).catchError((err) {
+    print("Err Response: $err");
+});
+```
+
 ## 📝 Feature List Roadmap
 
 | # | Feature               | Status |
@@ -44,7 +65,7 @@ sms.send(
 | 3 | Resend OTP            | 🟢     |
 | 4 | Verify OTP            | 🟢     |
 | 5 | Launch Campaign       | 🔴     |
-| 6 | Check Balance         | 🔴     |
+| 6 | Check Balance         | 🟢     |
 | 7 | Add SMS Template      | 🟢     |
 | 8 | Send WhatsApp Message | 🔴     |
 

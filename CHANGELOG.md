@@ -1,3 +1,8 @@
+## 1.0.4
+
+- Method to get Account Balance
+- Update packages and minor fixes
+
 ## 1.0.3+1
 
 - Update README.md

@@ -1,6 +1,5 @@
 import 'package:msg91/msg91.dart';
-import 'package:msg91/src/msg91_otp.dart';
-import 'package:msg91/src/msg91_sms.dart';
+import 'package:msg91/src/msg91_account.dart';
 
 void main() {
   String authKey = "XXXXXXXXXX";
@@ -88,6 +87,13 @@ void main() {
   //Resend OTP
   msg91.getOtp().resend(mobileNumber: mobile, type: ResendOTPType.VOICE).then((value) {
     print("Response: $value");
+  }).catchError((err) {
+    print("Err Response: $err");
+  });
+
+  //Get Account Balance
+  msg91.getAccount().checkBalance(routeType: RouteType.transactional).then((value) {
+    print("Balance: $value");
   }).catchError((err) {
     print("Err Response: $err");
   });

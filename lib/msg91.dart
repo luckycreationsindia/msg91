@@ -1,5 +1,5 @@
 /// Msg91 Official API Wrapper (Unofficial Dart Package)
-library msg91;
+library;
 
 export 'src/exceptions.dart';
 export 'src/msg91_base.dart';

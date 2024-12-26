@@ -1,3 +1,5 @@
+import 'package:msg91/src/msg91_account.dart';
+
 import 'exceptions.dart';
 import 'msg91_otp.dart';
 import 'msg91_sms.dart';
@@ -48,5 +50,16 @@ class Msg91 {
     _validateAuthKey(key);
 
     return Otp(key!);
+  }
+
+  /// Method to get all Account related APIs
+  /// <br/><br/>[authKey] parameter (optional) - Provide this parameter if you have not provided while initialization or if you want to use different authKey
+  /// <br/><br/>
+  Account getAccount({String? authKey}) {
+    _validateInit();
+    String? key = authKey ?? _authKey;
+    _validateAuthKey(key);
+
+    return Account(key!);
   }
 }

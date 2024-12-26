@@ -1,5 +1,4 @@
 import 'package:msg91/msg91.dart';
-import 'package:msg91/src/msg91_sms.dart';
 import 'package:test/test.dart';
 
 void main() {

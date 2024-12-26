@@ -59,6 +59,7 @@
 <p>Just install the package and check example for usage</p>
 <h2 id="usage">Usage</h2>
 <pre class="language-dart"><code class="language-dart">import 'package:msg91/msg91.dart';
+import 'package:msg91/src/msg91_sms.dart';
 
 final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final sms = msg91.getSMS();
@@ -101,12 +102,12 @@ sms.send(
 <tr>
 <td>3</td>
 <td>Resend OTP</td>
-<td>🟡</td>
+<td>🟢</td>
 </tr>
 <tr>
 <td>4</td>
 <td>Verify OTP</td>
-<td>🟡</td>
+<td>🟢</td>
 </tr>
 <tr>
 <td>5</td>
@@ -183,7 +184,7 @@ sms.send(
 <footer>
   <span class="no-break">
     msg91
-      1.0.2+1
+      1.0.3+1
   </span>
 
   

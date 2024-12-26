@@ -172,20 +172,18 @@ class Otp {
     _mobileNumber = mobileNumber;
     _validateMobileNumber();
 
-    late String _type;
+    late String otpType;
 
     switch (type) {
       case ResendOTPType.VOICE:
-        _type = "Voice";
+        otpType = "Voice";
         break;
       case ResendOTPType.TEXT:
-        _type = "text";
+        otpType = "text";
         break;
-      default:
-        _type = "Voice";
     }
 
-    Map<String, dynamic> searchParameters = {"authkey": authKey, "retrytype": _type, "mobile": _mobileNumber};
+    Map<String, dynamic> searchParameters = {"authkey": authKey, "retrytype": otpType, "mobile": _mobileNumber};
 
     Uri uri = Uri.parse(_resendOTPUrl);
     uri = uri.replace(queryParameters: searchParameters);
