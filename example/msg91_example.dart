@@ -90,8 +90,8 @@ void main() {
     print("Err Response: $err");
   });
 
-  //Get Account Balance
-  msg91.getAccount().checkBalance(routeType: RouteType.transactional).then((value) {
+  //Get Wallet Account Balance
+  msg91.getAccount().checkBalance(routeType: RouteType.wallet).then((value) {
     print("Balance: $value");
   }).catchError((err) {
     print("Err Response: $err");

@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-enum RouteType { transactional, promotional, otp }
+enum RouteType { transactional, promotional, otp, wallet }
 
 class Account {
   String authKey;
@@ -10,14 +10,14 @@ class Account {
 
   /// Method to get account balance.
   /// <hr/>
-  /// <br/>[routeType] parameter (optional) - Route Type to get balance for (default is transactional).
-  Future<dynamic> checkBalance(
-      {RouteType routeType = RouteType.transactional}) async {
-    late int type;
+  /// <br/>[routeType] parameter (optional) - Route Type to get balance for (default is wallet).
+  Future<dynamic> checkBalance({RouteType routeType = RouteType.wallet}) async {
+    late String type;
 
-    if (routeType == RouteType.transactional) type = 4;
-    if (routeType == RouteType.promotional) type = 1;
-    if (routeType == RouteType.otp) type = 106;
+    if (routeType == RouteType.transactional) type = "4";
+    if (routeType == RouteType.promotional) type = "1";
+    if (routeType == RouteType.otp) type = "106";
+    if (routeType == RouteType.wallet) type = "Wallet";
 
     Map<String, dynamic> searchParameters = {"authkey": authKey, "type": type};
 

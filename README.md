@@ -46,9 +46,9 @@ final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final account = msg91.getAccount();
 
 account.checkBalance(
-    routeType: RouteType.transactional,
+    routeType: RouteType.wallet,
 ).then((value) {
-    print("Balance: $value");
+    print("Wallet Balance: $value");
 }).catchError((err) {
     print("Err Response: $err");
 });

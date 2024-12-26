@@ -1,3 +1,7 @@
+## 1.0.4+2
+
+- Add option to get Wallet Balance
+
 ## 1.0.4+1
 
 - Fix bug related to Account Balance
