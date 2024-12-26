@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Sms constructor from Class Sms from the msg91 library, for the Dart programming language.">
-  <title>Sms constructor - Sms - msg91 library - Dart API</title>
+  <meta name="description" content="API docs for the checkBalance method from the Account class, for the Dart programming language.">
+  <title>checkBalance method - Account class - msg91 library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">msg91</a></li>
     <li><a href="../../msg91">msg91.dart</a></li>
-    <li><a href="../../msg91/Sms-class.html">Sms</a></li>
-    <li class="self-crumb">Sms constructor</li>
+    <li><a href="../../msg91/Account-class.html">Account</a></li>
+    <li class="self-crumb">checkBalance method</li>
   </ol>
-  <div class="self-name">Sms</div>
+  <div class="self-name">checkBalance</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -46,27 +46,62 @@
   </div>
 </header>
 <main>
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="msg91&#47;Sms-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
-<h1><span class="kind-constructor">Sms</span> constructor 
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="msg91&#47;Account-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">checkBalance</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
-      <span class="name ">Sms</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-authKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">authKey</span></span></li>
-</ol>)
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a></span>
+<span class="name ">checkBalance</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="checkBalance-param-routeType"><span class="type-annotation"><a href="../../msg91/RouteType.html">RouteType</a></span> <span class="parameter-name">routeType</span> = <span class="default-value">RouteType.transactional</span>, </span></li>
+</ol>})
+
+      
+
     </section>
     
+<section class="desc markdown">
+  <p>Method to get account balance.</p>
+<hr>
+<br>[routeType] parameter (optional) - Route Type to get balance for (default is transactional).
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Sms(this.authKey);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; checkBalance({RouteType routeType = RouteType.transactional}) async {
+  late int type;
+
+  if (routeType == RouteType.transactional) type = 4;
+  if (routeType == RouteType.promotional) type = 1;
+  if (routeType == RouteType.otp) type = 106;
+
+  Map&lt;String, dynamic&gt; searchParameters = {&quot;authkey&quot;: authKey, &quot;type&quot;: type};
+
+  Uri uri = Uri.parse(_getRouteBalance);
+  uri = uri.replace(queryParameters: searchParameters);
+
+  try {
+    http.Response result = await http.get(
+      uri,
+      headers: &lt;String, String&gt;{&quot;authkey&quot;: authKey},
+    );
+
+    if (result.statusCode == 200) {
+      return Future.value(result.body);
+    } else {
+      return Future.error(result.reasonPhrase ?? result.body);
+    }
+  } catch (error) {
+    return Future.error(error);
+  }
+}</code></pre>
 </section>
 
 
@@ -81,15 +116,15 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">msg91</a></li>
     <li><a href="../../msg91">msg91</a></li>
-    <li><a href="../../msg91/Sms-class.html">Sms</a></li>
-    <li class="self-crumb">Sms constructor</li>
+    <li><a href="../../msg91/Account-class.html">Account</a></li>
+    <li class="self-crumb">checkBalance method</li>
 </ol>
 
-    <h5>Sms class</h5>
+    <h5>Account class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
 </main>
 <footer>
   <span class="no-break">

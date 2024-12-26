@@ -14,8 +14,8 @@ class Account {
   Future<dynamic> checkBalance({RouteType routeType = RouteType.transactional}) async {
     late int type;
 
-    if (routeType == RouteType.transactional) type = 0;
-    if (routeType == RouteType.promotional) type = 4;
+    if (routeType == RouteType.transactional) type = 4;
+    if (routeType == RouteType.promotional) type = 1;
     if (routeType == RouteType.otp) type = 106;
 
     Map<String, dynamic> searchParameters = {"authkey": authKey, "type": type};
