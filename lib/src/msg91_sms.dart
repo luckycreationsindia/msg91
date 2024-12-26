@@ -29,7 +29,8 @@ class Sms {
   late String _flowId;
   late dynamic _recipients;
   final String _smsUrl = "https://api.msg91.com/api/v5/flow/";
-  final String _addTemplateUrl = "https://control.msg91.com/api/v5/sms/addTemplate";
+  final String _addTemplateUrl =
+      "https://control.msg91.com/api/v5/sms/addTemplate";
 
   void _validateTemplateId() {
     if (_flowId.isEmpty) {
@@ -53,7 +54,10 @@ class Sms {
   Sms(this.authKey);
 
   /// Method to send Single SMS. [flowId] parameter (Flow ID is your Template ID) and [recipient] are required. Provide options if you have replacement variable for SMS Template.
-  Future<dynamic> send({required String flowId, required SmsRecipient recipient, SmsOptions? options}) async {
+  Future<dynamic> send(
+      {required String flowId,
+      required SmsRecipient recipient,
+      SmsOptions? options}) async {
     _flowId = flowId;
     _recipients = recipient;
 
@@ -76,7 +80,8 @@ class Sms {
       if (options.senderId != null) {
         data['sender'] = options.senderId;
       }
-      data['short_url'] = options.shortURL == null || !options.shortURL! ? '0' : '1';
+      data['short_url'] =
+          options.shortURL == null || !options.shortURL! ? '0' : '1';
     }
 
     try {
@@ -109,7 +114,9 @@ class Sms {
 
   /// Method to send SMS to multiple recipients. [flowId] parameter (Flow ID is your Template ID) and [recipients] are required. Provide options if you have replacement variable for SMS Template. You can also provide keys within [recipients] parameters for replacement of variable on different numbers.
   Future<dynamic> sendMultiple(
-      {required String flowId, required List<SmsRecipient> recipients, SmsOptions? options}) async {
+      {required String flowId,
+      required List<SmsRecipient> recipients,
+      SmsOptions? options}) async {
     _flowId = flowId;
     _recipients = recipients;
 
@@ -126,7 +133,8 @@ class Sms {
       if (options.senderId != null) {
         data['sender'] = options.senderId;
       }
-      data['short_url'] = options.shortURL == null || !options.shortURL! ? '0' : '1';
+      data['short_url'] =
+          options.shortURL == null || !options.shortURL! ? '0' : '1';
     }
 
     try {
@@ -171,7 +179,8 @@ class Sms {
     } else if (_senderId.length < 3) {
       throw Msg91Exception("Minimum Characters in Sender ID should be 3");
     } else if (_senderId.length > 6) {
-      throw Msg91Exception("Maximum Characters in Sender ID should not be greater than 6");
+      throw Msg91Exception(
+          "Maximum Characters in Sender ID should not be greater than 6");
     }
   }
 

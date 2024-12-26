@@ -68,7 +68,8 @@ class Otp {
   /// <br/><br/>[options.otpLength] parameter (optional) - Number of digits in OTP (default : 4, min : 4, max : 9)
   /// <br/><br/>[options.expiry] parameter (optional) - Enter the value of OTP expiry time (in minutes) (default: 24 hours, max: 7 days, min: 1 minute)
   /// <br/><br/>[options.unicode] parameter (optional) - Enter [Unicode.UNICODE] if sending SMS in languages other than English, for english pass [Unicode.NORMAL]<br/><br/>
-  Future<dynamic> send({required String mobileNumber, required OtpOptions options}) async {
+  Future<dynamic> send(
+      {required String mobileNumber, required OtpOptions options}) async {
     _mobileNumber = mobileNumber;
     _validateMobileNumber();
 
@@ -76,7 +77,10 @@ class Otp {
       throw Msg91Exception("Template ID is required");
     }
 
-    Map<String, dynamic> searchParameters = {"templateId": options.templateId, "mobile": _mobileNumber};
+    Map<String, dynamic> searchParameters = {
+      "templateId": options.templateId,
+      "mobile": _mobileNumber
+    };
 
     Map<String, dynamic> data = {};
 
@@ -127,11 +131,15 @@ class Otp {
   /// <hr/>
   /// <br/>[otp] parameter (required) is where you set otp to verify.
   /// <br/>[mobileNumber] parameter (required) is where you set mobile number.
-  Future<dynamic> verify({required String otp, required String mobileNumber}) async {
+  Future<dynamic> verify(
+      {required String otp, required String mobileNumber}) async {
     _mobileNumber = mobileNumber;
     _validateMobileNumber();
 
-    Map<String, dynamic> searchParameters = {"otp": otp, "mobile": _mobileNumber};
+    Map<String, dynamic> searchParameters = {
+      "otp": otp,
+      "mobile": _mobileNumber
+    };
 
     Uri uri = Uri.parse(_verifyOTPUrl);
     uri = uri.replace(queryParameters: searchParameters);
@@ -168,7 +176,9 @@ class Otp {
   /// <br/>[otp] parameter (required) is where you set otp to verify.
   /// <br/>[mobileNumber] parameter (required) is where you set mobile number.
   /// <br/>[type] parameter (optional) is where you set type of OTP (default is voice).
-  Future<dynamic> resend({ResendOTPType type = ResendOTPType.VOICE, required String mobileNumber}) async {
+  Future<dynamic> resend(
+      {ResendOTPType type = ResendOTPType.VOICE,
+      required String mobileNumber}) async {
     _mobileNumber = mobileNumber;
     _validateMobileNumber();
 
@@ -183,7 +193,11 @@ class Otp {
         break;
     }
 
-    Map<String, dynamic> searchParameters = {"authkey": authKey, "retrytype": otpType, "mobile": _mobileNumber};
+    Map<String, dynamic> searchParameters = {
+      "authkey": authKey,
+      "retrytype": otpType,
+      "mobile": _mobileNumber
+    };
 
     Uri uri = Uri.parse(_resendOTPUrl);
     uri = uri.replace(queryParameters: searchParameters);

@@ -11,7 +11,8 @@ class Account {
   /// Method to get account balance.
   /// <hr/>
   /// <br/>[routeType] parameter (optional) - Route Type to get balance for (default is transactional).
-  Future<dynamic> checkBalance({RouteType routeType = RouteType.transactional}) async {
+  Future<dynamic> checkBalance(
+      {RouteType routeType = RouteType.transactional}) async {
     late int type;
 
     if (routeType == RouteType.transactional) type = 4;
