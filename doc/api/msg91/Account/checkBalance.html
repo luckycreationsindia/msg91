@@ -58,7 +58,7 @@
     <section class="multi-line-signature">
       
 <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a></span>
-<span class="name ">checkBalance</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="checkBalance-param-routeType"><span class="type-annotation"><a href="../../msg91/RouteType.html">RouteType</a></span> <span class="parameter-name">routeType</span> = <span class="default-value">RouteType.transactional</span>, </span></li>
+<span class="name ">checkBalance</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="checkBalance-param-routeType"><span class="type-annotation"><a href="../../msg91/RouteType.html">RouteType</a></span> <span class="parameter-name">routeType</span> = <span class="default-value">RouteType.wallet</span>, </span></li>
 </ol>})
 
       
@@ -68,19 +68,20 @@
 <section class="desc markdown">
   <p>Method to get account balance.</p>
 <hr>
-<br>[routeType] parameter (optional) - Route Type to get balance for (default is transactional).
+<br>[routeType] parameter (optional) - Route Type to get balance for (default is wallet).
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; checkBalance({RouteType routeType = RouteType.transactional}) async {
-  late int type;
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; checkBalance({RouteType routeType = RouteType.wallet}) async {
+  late String type;
 
-  if (routeType == RouteType.transactional) type = 4;
-  if (routeType == RouteType.promotional) type = 1;
-  if (routeType == RouteType.otp) type = 106;
+  if (routeType == RouteType.transactional) type = &quot;4&quot;;
+  if (routeType == RouteType.promotional) type = &quot;1&quot;;
+  if (routeType == RouteType.otp) type = &quot;106&quot;;
+  if (routeType == RouteType.wallet) type = &quot;Wallet&quot;;
 
   Map&lt;String, dynamic&gt; searchParameters = {&quot;authkey&quot;: authKey, &quot;type&quot;: type};
 
@@ -129,7 +130,7 @@
 <footer>
   <span class="no-break">
     msg91
-      1.0.4+1
+      1.0.4+2
   </span>
   
 </footer>

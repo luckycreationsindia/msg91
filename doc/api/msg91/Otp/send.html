@@ -84,7 +84,8 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; send({required String mobileNumber, required OtpOptions options}) async {
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; send(
+    {required String mobileNumber, required OtpOptions options}) async {
   _mobileNumber = mobileNumber;
   _validateMobileNumber();
 
@@ -92,7 +93,10 @@
     throw Msg91Exception(&quot;Template ID is required&quot;);
   }
 
-  Map&lt;String, dynamic&gt; searchParameters = {&quot;templateId&quot;: options.templateId, &quot;mobile&quot;: _mobileNumber};
+  Map&lt;String, dynamic&gt; searchParameters = {
+    &quot;templateId&quot;: options.templateId,
+    &quot;mobile&quot;: _mobileNumber
+  };
 
   Map&lt;String, dynamic&gt; data = {};
 
@@ -165,7 +169,7 @@
 <footer>
   <span class="no-break">
     msg91
-      1.0.4+1
+      1.0.4+2
   </span>
   
 </footer>

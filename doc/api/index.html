@@ -82,9 +82,9 @@ final msg91 = Msg91().initialize(authKey: "AUTH_KEY");
 final account = msg91.getAccount();
 
 account.checkBalance(
-    routeType: RouteType.transactional,
+    routeType: RouteType.wallet,
 ).then((value) {
-    print("Balance: $value");
+    print("Wallet Balance: $value");
 }).catchError((err) {
     print("Err Response: $err");
 });
@@ -187,7 +187,7 @@ account.checkBalance(
 <footer>
   <span class="no-break">
     msg91
-      1.0.4+1
+      1.0.4+2
   </span>
   
 </footer>

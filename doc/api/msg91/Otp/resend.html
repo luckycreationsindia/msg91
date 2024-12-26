@@ -78,7 +78,9 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; resend({ResendOTPType type = ResendOTPType.VOICE, required String mobileNumber}) async {
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; resend(
+    {ResendOTPType type = ResendOTPType.VOICE,
+    required String mobileNumber}) async {
   _mobileNumber = mobileNumber;
   _validateMobileNumber();
 
@@ -93,7 +95,11 @@
       break;
   }
 
-  Map&lt;String, dynamic&gt; searchParameters = {&quot;authkey&quot;: authKey, &quot;retrytype&quot;: otpType, &quot;mobile&quot;: _mobileNumber};
+  Map&lt;String, dynamic&gt; searchParameters = {
+    &quot;authkey&quot;: authKey,
+    &quot;retrytype&quot;: otpType,
+    &quot;mobile&quot;: _mobileNumber
+  };
 
   Uri uri = Uri.parse(_resendOTPUrl);
   uri = uri.replace(queryParameters: searchParameters);
@@ -151,7 +157,7 @@
 <footer>
   <span class="no-break">
     msg91
-      1.0.4+1
+      1.0.4+2
   </span>
   
 </footer>

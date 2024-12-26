@@ -77,11 +77,15 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; verify({required String otp, required String mobileNumber}) async {
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; verify(
+    {required String otp, required String mobileNumber}) async {
   _mobileNumber = mobileNumber;
   _validateMobileNumber();
 
-  Map&lt;String, dynamic&gt; searchParameters = {&quot;otp&quot;: otp, &quot;mobile&quot;: _mobileNumber};
+  Map&lt;String, dynamic&gt; searchParameters = {
+    &quot;otp&quot;: otp,
+    &quot;mobile&quot;: _mobileNumber
+  };
 
   Uri uri = Uri.parse(_verifyOTPUrl);
   uri = uri.replace(queryParameters: searchParameters);
@@ -139,7 +143,7 @@
 <footer>
   <span class="no-break">
     msg91
-      1.0.4+1
+      1.0.4+2
   </span>
   
 </footer>

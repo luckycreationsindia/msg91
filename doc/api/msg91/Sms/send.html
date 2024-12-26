@@ -75,7 +75,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; send({required String flowId, required SmsRecipient recipient, SmsOptions? options}) async {
+  <pre class="language-dart"><code class="language-dart">Future&lt;dynamic&gt; send(
+    {required String flowId,
+    required SmsRecipient recipient,
+    SmsOptions? options}) async {
   _flowId = flowId;
   _recipients = recipient;
 
@@ -98,7 +101,8 @@
     if (options.senderId != null) {
       data[&#39;sender&#39;] = options.senderId;
     }
-    data[&#39;short_url&#39;] = options.shortURL == null || !options.shortURL! ? &#39;0&#39; : &#39;1&#39;;
+    data[&#39;short_url&#39;] =
+        options.shortURL == null || !options.shortURL! ? &#39;0&#39; : &#39;1&#39;;
   }
 
   try {
@@ -155,7 +159,7 @@
 <footer>
   <span class="no-break">
     msg91
-      1.0.4+1
+      1.0.4+2
   </span>
   
 </footer>
