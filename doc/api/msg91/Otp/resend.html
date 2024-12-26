@@ -16,20 +16,16 @@
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
   <link rel="icon" href="../../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">msg91</a></li>
-    <li><a href="../../msg91/msg91-library.html">msg91.dart</a></li>
+    <li><a href="../../msg91">msg91.dart</a></li>
     <li><a href="../../msg91/Otp-class.html">Otp</a></li>
     <li class="self-crumb">resend method</li>
   </ol>
@@ -50,7 +46,6 @@
   </div>
 </header>
 <main>
-
 <div
     id="dartdoc-main-content"
     class="main-content"
@@ -62,8 +57,7 @@
 
     <section class="multi-line-signature">
       
-
-<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a></span>
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a></span>
 <span class="name ">resend</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="resend-param-type"><span class="type-annotation"><a href="../../msg91/ResendOTPType.html">ResendOTPType</a></span> <span class="parameter-name">type</span> = <span class="default-value">ResendOTPType.VOICE</span>, </span></li>
 <li><span class="parameter" id="resend-param-mobileNumber"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">mobileNumber</span>, </span></li>
 </ol>})
@@ -88,20 +82,18 @@
   _mobileNumber = mobileNumber;
   _validateMobileNumber();
 
-  late String _type;
+  late String otpType;
 
   switch (type) {
     case ResendOTPType.VOICE:
-      _type = &quot;Voice&quot;;
+      otpType = &quot;Voice&quot;;
       break;
     case ResendOTPType.TEXT:
-      _type = &quot;text&quot;;
+      otpType = &quot;text&quot;;
       break;
-    default:
-      _type = &quot;Voice&quot;;
   }
 
-  Map&lt;String, dynamic&gt; searchParameters = {&quot;authkey&quot;: authKey, &quot;retrytype&quot;: _type, &quot;mobile&quot;: _mobileNumber};
+  Map&lt;String, dynamic&gt; searchParameters = {&quot;authkey&quot;: authKey, &quot;retrytype&quot;: otpType, &quot;mobile&quot;: _mobileNumber};
 
   Uri uri = Uri.parse(_resendOTPUrl);
   uri = uri.replace(queryParameters: searchParameters);
@@ -136,7 +128,6 @@
 
 
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -144,41 +135,31 @@
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">msg91</a></li>
-    <li><a href="../../msg91/msg91-library.html">msg91</a></li>
+    <li><a href="../../msg91">msg91</a></li>
     <li><a href="../../msg91/Otp-class.html">Otp</a></li>
     <li class="self-crumb">resend method</li>
 </ol>
 
-
     <h5>Otp class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
-
 </main>
-
 <footer>
   <span class="no-break">
     msg91
-      1.0.3+1
+      1.0.4
   </span>
-
   
 </footer>
-
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
 <script src="../../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 
